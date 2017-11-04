@@ -2,19 +2,23 @@
   "name": "ziro-data",
   "version": "1.0.0",
   "description": "Application that serves Ziro data about both resellers and brands",
+  "repository": "https://github.com/vitorbarbosa19/ziro-data",
   "main": "index.js",
   "scripts": {
     "start": "micro"
   },
   "keywords": [
-    "atacado",
-    "moda",
-    "bom retiro"
+    "node",
+    "google-spreadsheet",
+    "okta"
   ],
   "author": "Vitor Barbosa",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.5.0",
+    "axios": "^0.17.0",
     "dotenv": "^4.0.0",
+    "google-spreadsheet": "^2.0.4",
     "micro": "^9.0.0",
     "request": "^2.83.0"
   }

@@ -1,33 +1,22 @@
-require('dotenv').config()
-const request = require('request')
-const url = require('url') 
-const resellersSheetId = process.env.RESELLERS_SHEET_ID
-const suppliersSheetId = process.env.SUPPLIERS_SHEET_ID
-const apiKey = process.env.API_KEY
+const url = require('url')
 
 module.exports = (req, res) => {
-  const type = url.parse(req.url, true).query.type
+  //set header to allow cross origin
   res.setHeader('Access-Control-Allow-Origin', '*')
+  //stop annoying browser favicon request
+  if(req.url === '/favicon.ico')
+    res.end() 
+  //verify type of request and decide which handler to pass it to
+  const type = url.parse(req.url, true).query.type
+  const handler = require('./utils/handler')
   if(type === 'lojistas') {
-    request(`https://sheets.googleapis.com/v4/spreadsheets/${resellersSheetId}/values/${type}?key=${apiKey}`, (error, response, body) => {
-      if(!error) {      
-        res.end(body)
-      }
-      else
-        console.log(error)
-    })
+    handler.resellers(req, res, url)
   }
   else if(type === 'fornecedores') {
-    request(`https://sheets.googleapis.com/v4/spreadsheets/${suppliersSheetId}/values/${type}?key=${apiKey}`, (error, response, body) => {
-      if(!error) {      
-        res.end(body)
-      }
-      else
-        console.log(error)
-    })
+    handler.suppliers(req, res, type) 
   }
   else
-    res.end('Especifique um tipo: Lojistas ou Fornecedores')
+    res.end('Especifique um tipo: lojistas ou fornecedores')
 }
 
 //remember to deploy with --dotenv

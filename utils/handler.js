@@ -3,7 +3,6 @@ require('dotenv').config()
 exports.resellers = (req, res, url) => {
 		//require basic modules
 		const async = require('async')
-    const send = require('micro').send
     const GoogleSpreadsheet = require('google-spreadsheet')
     //receive all parsed query params as lead information to be stored in google sheet and Okta
     const parser = require('./parser')

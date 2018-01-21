@@ -1,5 +1,37 @@
 require('dotenv').config()
 
+exports.okta = (req, res) => {
+  const url = require('url')
+  const axios = require('axios')
+  const { firstName, lastName, email, cnpj } = url.parse(req.url, true).query
+  axios({
+    url: `${process.env.OKTA_URL}/api/v1/users`,
+    method: 'post',
+    headers: {
+      'Authorization': `SSWS ${process.env.OKTA_TOKEN}`
+    },
+    data: {
+      'profile': {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'login': email
+      },
+      'credentials': {
+        'password': cnpj
+      }
+    }
+  })
+  .then( (response) => {
+    console.log(response.data)
+    res.end(JSON.stringify(response.data))
+  })
+  .catch( (error) => {
+    console.log(error.response)
+    res.end(error.response)
+  })
+}
+
 exports.resellers = (req, res, url) => {
 	//require basic modules
 	const async = require('async')
@@ -7,6 +39,7 @@ exports.resellers = (req, res, url) => {
   //receive all parsed query params as lead information to be stored in google sheet and Okta
   const parser = require('./parser')
 	const leadInfo = parser.parseQueryParams(req, url)
+  console.log(leadInfo)
   //create a new instance of google spreadsheet's object
   const spreadsheet = new GoogleSpreadsheet(process.env.RESELLERS_SHEET_ID)
 		//declare callback to handle error during async execution
@@ -25,39 +58,13 @@ exports.resellers = (req, res, url) => {
       spreadsheet.addRow(1, leadInfo, (error, rows) => {
         if(error)
           errorCallback(error)
-        callback(null, 'sheet')
-      })
-    },
-    //create new user via Okta api
-    (callback) => {
-      const axios = require('axios')
-      axios({
-        url: `${process.env.OKTA_URL}/api/v1/users`,
-        method: 'post',
-        headers: {
-          'Authorization': `SSWS ${process.env.OKTA_TOKEN}`
-        },
-        data: {
-          'profile': {
-            'firstName': leadInfo.firstName,
-            'lastName': leadInfo.lastName,
-            'email': leadInfo.email,
-            'login': leadInfo.email,
-          },
-          'credentials': {
-            'password': leadInfo.cnpj
-          }
-        }
-      })
-      .then( (response) => {
-        res.end(JSON.stringify(response.data))
-      })
-      .catch( (error) => {
-        errorCallback(error)
+        callback(null)
       })
     }
   ], (error) => {
-    errorCallback(error)
+    if(error)
+      errorCallback(error)
+    res.end('success')
   })
 }
 
@@ -96,84 +103,3 @@ exports.cloudinary = (req, res) => {
     })
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

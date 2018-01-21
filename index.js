@@ -10,6 +10,9 @@ module.exports = (req, res) => {
   const type = url.parse(req.url, true).query.type
   const handler = require('./utils/handler')
   switch (type) {
+    case 'okta':
+      handler.okta(req, res)
+      break
     case 'lojistas':
       handler.resellers(req, res, url)
       break
@@ -20,7 +23,7 @@ module.exports = (req, res) => {
       handler.cloudinary(req, res)
       break
     default:
-      res.end('Especifique um tipo: lojistas, fornecedores ou cloudinary')
+      res.end('Especifique um tipo: okta, lojistas, fornecedores ou cloudinary')
   }
 }
 

@@ -39,7 +39,6 @@ exports.resellers = (req, res, url) => {
   //receive all parsed query params as lead information to be stored in google sheet and Okta
   const parser = require('./parser')
 	const leadInfo = parser.parseQueryParams(req, url)
-  console.log(leadInfo)
   //create a new instance of google spreadsheet's object
   const spreadsheet = new GoogleSpreadsheet(process.env.RESELLERS_SHEET_ID)
 		//declare callback to handle error during async execution

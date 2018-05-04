@@ -4,46 +4,47 @@ const formatDate = (date) => {
 	let month
 	switch (monthNumber) {
 		case 0:
-			month = 'Jan'
+			month = 'jan'
 			break
 		case 1:
-			month = 'Fev'
+			month = 'fev'
 			break
 		case 2:
-			month = 'Mar'
+			month = 'mar'
 			break
 		case 3:
-			month = 'Abr'
+			month = 'abr'
 			break
 		case 4:
-			month = 'Mai'
+			month = 'mai'
 			break
 		case 5:
-			month = 'Jun'
+			month = 'jun'
 			break
 		case 6:
-			month = 'Jul'
+			month = 'jul'
 			break
 		case 7:
-			month = 'Ago'
+			month = 'ago'
 			break
 		case 8:
-			month = 'Set'
+			month = 'set'
 			break
 		case 9:
-			month = 'Out'
+			month = 'out'
 			break
 		case 1:
-			month = 'Nov'
+			month = 'nov'
 			break
 		case 11:
-			month = 'Dez'
+			month = 'dez'
 			break	
 	}
 	const year = new Date(date).getFullYear()
 	const time = date.substr(11,8)
 	return {
-		data: `${day}/${month}/${year} ${time}`,
+		data_hora: `${day}/${month}/${year} ${time}`,
+		data: `${day}/${month}/${year}`,
 		mes: month,
 		ano: year
 	}

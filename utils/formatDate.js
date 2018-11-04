@@ -33,7 +33,7 @@ const formatDate = (date) => {
 		case 9:
 			month = 'out'
 			break
-		case 1:
+		case 10:
 			month = 'nov'
 			break
 		case 11:

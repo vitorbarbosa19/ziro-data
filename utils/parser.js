@@ -23,5 +23,5 @@ exports.parseQueryParams = (req, url) => {
 }
 
 /* 
-http://localhost:3000/?type=lojistas&email=lidianesrreis@gmail.com&cadastro=00uewqe7hurEsyN260h7&dataCadastro=04/Mai/2018%2014:18:56&lojista=Lidiane%20dos%20Reis&cnpj=30.144.102/0001-41&whatsapp=82996302060&referral=Indica%C3%A7%C3%A3o&hasStore=Sim&maxPay=At%C3%A9%20R$200,00&when=O%20quanto%20antes&monthSpend=At%C3%A9%20R$%2015.000,00
+http://localhost:3000/?type=lojistas&email=lidianesrreis@gmail.com&cadastro=00uewqe7hurEsyN260h7&dataCadastro=2018-11-04T03:20:25.000Z&lojista=Lidiane%20dos%20Reis&cnpj=30144102000141&whatsapp=82996302060&referral=Indica%C3%A7%C3%A3o&hasStore=Sim&maxPay=At%C3%A9%20R$200,00&when=O%20quanto%20antes&monthSpend=At%C3%A9%20R$%2015.000,00
 */

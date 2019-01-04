@@ -23,12 +23,12 @@ exports.okta = (req, res) => {
     }
   })
   .then( (response) => {
-    console.log(response.data)
+    console.log('RESPONSE', response.data)
     res.end(JSON.stringify(response.data))
   })
   .catch( (error) => {
-    console.log(error.response)
-    res.end(error.response)
+    console.log('ERROR', error.response.data)
+    res.end(error.response.data)
   })
 }
 
@@ -102,3 +102,5 @@ exports.cloudinary = (req, res) => {
     })
   }
 }
+
+// curl 'http://localhost:3000/?type=okta&firstName=V&lastName=B&email=v@gmail.com&cnpj=32148516000174'
